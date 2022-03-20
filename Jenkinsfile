@@ -5,7 +5,7 @@ pipeline {
       parallel {
         stage('Checkout SCM') {
           steps {
-            git(url: 'https://github.com/Narendrakaduru/SaiJavaCode.git', branch: 'master', credentialsId: 'GitCred')
+            git(url: 'https://github.com/Narendrakaduru/SaiJavaCode.git', credentialsId: 'GitCred')
           }
         }
 
