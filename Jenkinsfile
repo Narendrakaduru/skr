@@ -55,12 +55,9 @@ pipeline {
       }
     }
 
-    stage('Publish to Docker Hub') {
+    stage('Run Docker container on Jenkins Agent') {
       steps {
-        withDockerRegistry(credentialsId: 'DockerAuth', url: 'https://hub.docker.com/') {
-          sh 'docker push narendra8686/my-app:1.0.0'
-        }
-
+        sh 'docker run -d -p 9090:8080 narendra8686/webapp'
       }
     }
 
