@@ -1,4 +1,4 @@
-FROM tomcat:8
+FROM tomcat:9.0
 LABEL app=my-app
 MAINTAINER "kadurunarendra@gmail.com"
 EXPOSE 9090
