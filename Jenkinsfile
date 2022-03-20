@@ -57,7 +57,7 @@ pipeline {
 
     stage('Publish to Docker Hub') {
       steps {
-        withDockerRegistry(credentialsId: 'DockerAuth', url: 'https://hub.docker.com/u/narendra8686') {
+        withDockerRegistry(credentialsId: 'DockerAuth', url: 'https://hub.docker.com/') {
           sh 'docker push narendra8686/my-app:1.0.0'
         }
 
