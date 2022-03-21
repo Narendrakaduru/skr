@@ -51,13 +51,13 @@ pipeline {
 
     stage('Docker Build') {
       steps {
-        sh 'docker build -t my-app .'
+        sh 'docker build -t tomcat-img .'
       }
     }
 
     stage('Run Docker container on Jenkins Agent') {
       steps {
-        sh 'docker run --name tomcat -d -p 8888:8080 my-app:latest'
+        sh 'docker run --name tomcat -d -p 8888:8080 tomcat-img:latest'
       }
     }
 
