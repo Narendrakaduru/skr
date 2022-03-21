@@ -1,4 +1,4 @@
-FROM tomcat:9.0
+FROM tomcat:latest
 LABEL app=my-app
 MAINTAINER "kadurunarendra@gmail.com"
 EXPOSE 8080
