@@ -63,9 +63,9 @@ pipeline {
 
     stage('Push to DockerHub') {
       steps {
-        sh 'docker tag sai-java-img:1.0.0 narendra8686/sai-java-img:1.0.0'
+        sh 'docker tag sai-java-img:latest narendra8686/sai-java-img:latest'
         sh 'docker login -u narendra8686 -p Nani8686@'
-        sh 'docker push narendra8686/sai-java-img:1.0.0'
+        sh 'docker push narendra8686/sai-java-img:latest'
       }
     }
 
