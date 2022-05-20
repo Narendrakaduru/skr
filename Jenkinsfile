@@ -51,21 +51,21 @@ pipeline {
 
     stage('Docker Build') {
       steps {
-        sh 'docker build -t tomcat-img .'
+        sh 'docker build -t sai-java-img .'
       }
     }
 
     stage('Run Docker container on Jenkins Agent') {
       steps {
-        sh 'docker run --name tomcat -d -p 8888:8080 tomcat-img:latest'
+        sh 'docker run --name tomcat -d -p 8888:8080 sai-java-img:latest'
       }
     }
 
     stage('Push to DockerHub') {
       steps {
-        sh 'docker tag tomcat-img:1.0.0 narendra8686/saijavacode:1.0.0'
+        sh 'docker tag sai-java-img:1.0.0 narendra8686/sai-java-img:1.0.0'
         sh 'docker login -u narendra8686 -p Nani8686@'
-        sh 'docker push narendra8686/saijavacode:1.0.0'
+        sh 'docker push narendra8686/sai-java-img:1.0.0'
       }
     }
 
