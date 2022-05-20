@@ -61,6 +61,14 @@ pipeline {
       }
     }
 
+    stage('Push to DockerHub') {
+      steps {
+        sh 'docker tag tomcat-img:1.0.0 narendra8686/saijavacode:1.0.0'
+        sh 'docker login -u narendra8686 -p Nani8686@'
+        sh 'docker push narendra8686/saijavacode:1.0.0'
+      }
+    }
+
   }
   tools {
     maven 'M2_HOME'
