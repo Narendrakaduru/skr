@@ -1,10 +1,5 @@
 pipeline {
   agent any
-  environment {
-	DOCKERHUB_CREDENTIALS=credentials('DockerAuth')
-	TESTER = 'Nani'
-    	BUILD_ID = '1.0.0'
-	}
   stages {
     stage('Checkout SCM') {
       parallel {
@@ -77,5 +72,10 @@ pipeline {
   }
   tools {
     maven 'M2_HOME'
+  }
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('DockerAuth')
+    TESTER = 'Nani'
+    BUILD_ID = '1.0.0'
   }
 }
