@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+		DOCKERHUB_CREDENTIALS=credentials('DockerAuth')
+	}
   stages {
     stage('Checkout SCM') {
       parallel {
@@ -64,7 +67,7 @@ pipeline {
     stage('Push to DockerHub') {
       steps {
         sh 'docker tag sai-java-img:latest narendra8686/sai-java-img:latest'
-        sh 'docker login -u narendra8686 -p Nani8686@'
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
         sh 'docker push narendra8686/sai-java-img:latest'
       }
     }
