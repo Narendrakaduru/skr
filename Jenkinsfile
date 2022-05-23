@@ -1,18 +1,6 @@
 pipeline {
   agent none
   stages {
-    stage('Checkout SCM') {
-      agent {
-        docker {
-          image 'docker-dev:1.9'
-        }
-
-      }
-      steps {
-        git(url: 'https://github.com/Narendrakaduru/skr.git', credentialsId: 'GitAuth', branch: 'main')
-      }
-    }
-
     stage('Build') {
       agent {
         docker {
