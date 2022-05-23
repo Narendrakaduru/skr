@@ -4,6 +4,7 @@ pipeline {
     stage('Checkout SCM') {
       steps {
         git(url: 'https://github.com/Narendrakaduru/skr.git', credentialsId: 'GitAuth', branch: 'main')
+      }
     }
     stage('Build') {
       agent {
@@ -22,5 +23,4 @@ pipeline {
       }
     }
   }
- }
 }
