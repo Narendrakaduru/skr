@@ -1,81 +1,21 @@
 pipeline {
-  agent any
+  agent none
   stages {
-    stage('Checkout SCM') {
-      parallel {
-        stage('Checkout SCM') {
-          steps {
-            git(url: 'https://github.com/Narendrakaduru/SaiJavaCode.git', credentialsId: 'GitAuth')
-          }
-        }
-
-        stage('Check POM') {
-          steps {
-            fileExists 'pom.xml'
-          }
-        }
-
-      }
-    }
-
     stage('Build') {
-      parallel {
-        stage('Build') {
-          steps {
-            sh 'mvn clean package'
-          }
-        }
-
-        stage('Print Tester') {
-          steps {
-            echo "The Tester is ${TESTER}"
-            sleep 5
-          }
-        }
-
-        stage('Build No') {
-          steps {
-            echo "Print Build No ${BUILD_ID}"
-            sleep 10
-          }
-        }
-
+      agent {
+        docker { image 'maven:3.8.1-adoptopenjdk-11' }
       }
-    }
-
-    stage('Test') {
       steps {
-        sh 'mvn test'
+        sh 'mvn clean package'
       }
     }
-
-    stage('Docker Build') {
+    stage('Front-end') {
+      agent {
+        docker { image 'node:16-alpine' }
+      }
       steps {
-        sh 'docker build -t sai-java-img .'
+        sh 'node --version'
       }
     }
-
-    stage('Run Docker container on Jenkins Agent') {
-      steps {
-        sh 'docker run --name tomcat -d -p 8888:8080 sai-java-img:latest'
-      }
-    }
-
-    stage('Push to DockerHub') {
-      steps {
-        sh 'docker tag sai-java-img:latest narendra8686/sai-java-img:latest'
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-        sh 'docker push narendra8686/sai-java-img:latest'
-      }
-    }
-
-  }
-  tools {
-    maven 'M2_HOME'
-  }
-  environment {
-    DOCKERHUB_CREDENTIALS = credentials('DockerAuth')
-    TESTER = 'Nani'
-    BUILD_ID = '1.0.0'
   }
 }
