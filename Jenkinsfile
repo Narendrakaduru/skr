@@ -21,7 +21,7 @@ pipeline {
 
       }
       steps {
-        sh 'cp ./skr/webapp/target/webapp.war /usr/local/tomcat/webapps/skr.war'
+        sh 'cp /var/lib/jenkins/workspace/skr/webapp/target/webapp.war /usr/local/tomcat/webapps/skr.war'
       }
     }
 
