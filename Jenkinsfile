@@ -16,11 +16,12 @@ pipeline {
     stage('Deploy to TomCat') {
       agent {
         docker {
-          image 'tomcat:jre11-temurin-focal'
+          dockerfile true
         }
 
       }
       steps {
+        sh 'docker build -t skr-img .'
         sh 'cp /var/lib/jenkins/workspace/skr/webapp/target/webapp.war /usr/local/tomcat/webapps/webapp.war'
       }
     }
