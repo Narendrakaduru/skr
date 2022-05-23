@@ -13,15 +13,15 @@ pipeline {
       }
     }
 
-    stage('Front-end') {
+    stage('Deploy to TomCat') {
       agent {
         docker {
-          image 'node:16-alpine'
+          image 'tomcat:jre11-temurin-focal'
         }
 
       }
       steps {
-        sh 'node --version'
+        sh 'cp ./target/webapp.war /usr/local/tomcat/webapps/skr.war'
       }
     }
 
