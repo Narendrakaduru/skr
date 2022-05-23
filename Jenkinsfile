@@ -14,12 +14,7 @@ pipeline {
     }
 
     stage('Deploy to TomCat') {
-      agent {
-        docker {
-          dockerfile true
-        }
-
-      }
+      agent { dockerfile true }
       steps {
         sh 'docker build -t skr-img .'
       }
